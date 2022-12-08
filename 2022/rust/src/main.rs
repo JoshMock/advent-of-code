@@ -1,5 +1,7 @@
 extern crate argparse;
 
+use std::fs;
+
 use argparse::{ArgumentParser, Store};
 
 fn main() {
@@ -15,4 +17,38 @@ fn main() {
         ap.parse_args_or_exit();
     }
     println!("day: {}, input: {}", day, input);
+
+    let input_contents = fs::read_to_string(input).expect("Should have been able to read the file");
+
+    match day {
+        1 => {
+            println!("day 1 let's goooo");
+            day1(input_contents);
+        }
+        _ => {
+            println!("no valid day chosen");
+        }
+    }
+}
+
+fn day1(input: String) {
+    let lines: Vec<&str> = input.split('\n').collect();
+    let mut single_sum: i32 = 0;
+    let mut sums: Vec<i32> = Vec::new();
+    for line in lines {
+        if line != "\n" {
+            let calories: i32 = line.parse().expect("not an number");
+            single_sum += calories;
+        } else {
+            sums.push(single_sum);
+            single_sum = 0;
+        }
+    }
+    println!(
+        "sums: {}",
+        sums.iter()
+            .map(|&x| x.to_string())
+            .collect::<str>()
+            .join(", ")
+    );
 }
