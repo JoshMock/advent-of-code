@@ -45,16 +45,13 @@ fn day1(input: String) {
             single_sum = 0;
         }
     }
-    println!(
-        "sums: {}",
-        sums.iter()
-            .map(|&x| x.to_string())
-            .collect::<Vec<String>>()
-            .join(", ")
-    );
     let max = sums.iter().max();
     match max {
         Some(max) => println!("{}", max),
-        None => println!("Nada"),
+        None => println!("Empty vector"),
     }
+
+    // part 2
+    sums.sort_by(|a, b| b.cmp(a));
+    println!("{}", sums[0] + sums[1] + sums[2]);
 }
