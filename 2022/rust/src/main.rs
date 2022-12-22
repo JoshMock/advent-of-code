@@ -32,11 +32,12 @@ fn main() {
 }
 
 fn day1(input: String) {
+    // part 1
     let lines: Vec<&str> = input.split('\n').collect();
     let mut single_sum: i32 = 0;
     let mut sums: Vec<i32> = Vec::new();
     for line in lines {
-        if line != "\n" {
+        if line != "" {
             let calories: i32 = line.parse().expect("not an number");
             single_sum += calories;
         } else {
@@ -48,7 +49,12 @@ fn day1(input: String) {
         "sums: {}",
         sums.iter()
             .map(|&x| x.to_string())
-            .collect::<str>()
+            .collect::<Vec<String>>()
             .join(", ")
     );
+    let max = sums.iter().max();
+    match max {
+        Some(max) => println!("{}", max),
+        None => println!("Nada"),
+    }
 }
